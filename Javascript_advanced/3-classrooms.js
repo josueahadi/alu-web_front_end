@@ -1,19 +1,16 @@
 function createClassRoom(numbersOfStudents) {
-  function studentSeat(seat) {
-    return () => seat;
+    function studentSeat(seat) {
+      return function () {
+        return seat;
+      };
+    }
+  
+    let students = new Array();
+    for (let i = 0; i < numbersOfStudents; i++) {
+      students.push(studentSeat(i + 1));
+    }
+  
+    return students;
   }
-  const students = [];
-
-  for (let i = 0; i < numbersOfStudents; i++) {
-    students.push(studentSeat(i + 1));
-  }
-
-  return students;
-}
-
-// Closure classRoom with 10 students
-const classRoom = createClassRoom(10);
-
-console.log(classRoom[0]());
-console.log(classRoom[3]());
-console.log(classRoom[9]());
+  
+  const classRoom = createClassRoom(10);
